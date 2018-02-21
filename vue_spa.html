@@ -4,54 +4,428 @@
   <title>My first SPA</title>
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
 <div id="app">
   <router-link to="/top">トップページ</router-link>
-  <router-link to="/users">ユーザー一覧ページ</router-link>
+  <router-link to="/posts">記事一覧</router-link>
   <router-view></router-view>
 </div>
 
 
-<script type="x-template" id="user-list">
+<script type="x-template" id="post-list">
   <div>
     <div class="loading" v-if="loading">ロード中...</div>
     <div v-if="error" class="error">
       {{ error }}
     </div>
-    <!-- usersがロードされたら各ユーザーの名前を表示する -->
-    <div v-for="user in users" :key="user.id">
-      <h2>{{ user.name }}</h2>
+    <!-- postsがロードされたら各投稿のタイトルを表示する -->
+    <div v-for="post in posts" :key="post.id">
+      <h2>{{ post.title.rendered }}</h2>
     </div>
   </div>
 </script>
 
 <script type="text/javascript">
 // 擬似的にAPI経由で情報を取得したようにする
-var getUsers = function (callback) {
+var getposts = function (callback) {
   setTimeout(function () {
     callback(null, [
-      {
-        id: '001',
-        name: 'Takuya Tejima'
-      },
-      {
-        id: '002',
-        name: 'Yohei Noda'
-      }
+  {
+    "id": 16,
+    "date": "2018-02-20T16:20:30",
+    "date_gmt": "2018-02-20T07:20:30",
+    "guid": {
+      "rendered": "http://118.27.35.38/wordpress/?p=16"
+    },
+    "modified": "2018-02-20T16:20:30",
+    "modified_gmt": "2018-02-20T07:20:30",
+    "slug": "post-16",
+    "status": "publish",
+    "type": "post",
+    "link": "http://118.27.35.38/wordpress/archives/16",
+    "title": {
+      "rendered": "てｓｔ"
+    },
+    "content": {
+      "rendered": "<p>ててててｓ</p>\n",
+      "protected": false
+    },
+    "excerpt": {
+      "rendered": "<p>ててててｓ</p>\n",
+      "protected": false
+    },
+    "author": 1,
+    "featured_media": 0,
+    "comment_status": "open",
+    "ping_status": "open",
+    "sticky": false,
+    "template": "",
+    "format": "standard",
+    "meta": [],
+    "categories": [
+      1
+    ],
+    "tags": [],
+    "_links": {
+      "self": [
+        {
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/posts/16"
+        }
+      ],
+      "collection": [
+        {
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/posts"
+        }
+      ],
+      "about": [
+        {
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/types/post"
+        }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/users/1"
+        }
+      ],
+      "replies": [
+        {
+          "embeddable": true,
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/comments?post=16"
+        }
+      ],
+      "version-history": [
+        {
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/posts/16/revisions"
+        }
+      ],
+      "wp:attachment": [
+        {
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/media?parent=16"
+        }
+      ],
+      "wp:term": [
+        {
+          "taxonomy": "category",
+          "embeddable": true,
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/categories?post=16"
+        },
+        {
+          "taxonomy": "post_tag",
+          "embeddable": true,
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/tags?post=16"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 9,
+    "date": "2018-02-19T13:47:20",
+    "date_gmt": "2018-02-19T04:47:20",
+    "guid": {
+      "rendered": "http://blockchain-jp-wiki.org/wordpress/?p=9"
+    },
+    "modified": "2018-02-19T13:47:20",
+    "modified_gmt": "2018-02-19T04:47:20",
+    "slug": "%e4%b8%ad%e5%9b%bd%e3%81%aeit%e3%82%b8%e3%83%a3%e3%82%a4%e3%82%a2%e3%83%b3%e3%83%88%e3%80%81%e3%82%a2%e3%83%aa%e3%83%90%e3%83%90%e3%81%ae%e5%ae%9f%e6%85%8b",
+    "status": "publish",
+    "type": "post",
+    "link": "http://118.27.35.38/wordpress/archives/9",
+    "title": {
+      "rendered": "中国のITジャイアント、アリババの実態"
+    },
+    "content": {
+      "rendered": "<p>世界の巨大OTT（Over The Top）プレイヤー、あるいはITジャイアントと言えば、グーグル（Google）、アップル（Apple）、フェイスブック（Facebook）、アマゾン・ドット・コム（Amazon.com）の米4社が有名だ。その頭文字からGAFAと呼ばれる。GAFAは世界のほとんどの地域で大きなプレゼンスを誇っているが、その影響力が極めて限定されているのが中国だ。</p>\n<p>GAFAに相当する中国の巨大OTTは、バイドゥ（Baidu、百度）、アリババグループ（Alibaba Group、阿里巴巴集団）、テンセント（Tencent、騰訊科技）の3社である。これらは頭文字をとってBATと略される。本稿では、BATのうち成長が著しく最も影響力の大きいAlibabaについて、その背後で中国政府が強力に進める「一帯一路（現代の陸と海のシルクロード）」政策と絡めながら、注目すべきポイントをまとめる。</p>\n<p><img class=\"alignnone size-medium wp-image-10\" src=\"http://blockchain-jp-wiki.org/wordpress/wp-content/uploads/2018/02/fig03-255x300.jpg\" alt=\"\" width=\"255\" height=\"300\" srcset=\"http://118.27.35.38/wordpress/wp-content/uploads/2018/02/fig03-255x300.jpg 255w, http://118.27.35.38/wordpress/wp-content/uploads/2018/02/fig03-768x904.jpg 768w, http://118.27.35.38/wordpress/wp-content/uploads/2018/02/fig03-870x1024.jpg 870w, http://118.27.35.38/wordpress/wp-content/uploads/2018/02/fig03.jpg 1000w\" sizes=\"(max-width: 255px) 100vw, 255px\" /></p>\n<h4>「独身の日」にAlibabaの取引額が2.7兆円を超えた</h4>\n<p>まず中国国内の最近の動きから見てみよう。毎年11月11日は数字の並びから「独身の日」（中国では「双十一」「単身節」「光棍節」と表記）と呼ばれ、電子商取引（EC）の集中キャンペーンが行われる日としてここ数年で完全に定着した。なかでもAlibabaのプレゼンスは最大であり、同社の2017年「独身の日」の総取引額は、24時間で驚くべきことに約1,600億元（約2.7兆円超）という規模であった。なお、この日の主要6つのECプラットフォーム合計では、取引額は2,540億元（約4.3兆円）だった。これらには海外との取引（越境EC）も相当量含まれており、一帯一路エリアの国々も含め、中国人が進出する世界各地をまたぎながら様々なレベルで急速に拡大している状況だ。</p>\n<h4>拡大するキャッシュレス化</h4>\n<p>この背景は、スマートフォン（スマホ）の普及と相まってモバイル決済が急速に拡大したことと無関係には語れない。中国では特に2017年に入ってから「キャッシュレス化」の動きが加速している。2017年7月の中国インターネット情報センター（CNNIC）による発表によると、同6月末時点で約5億人がモバイル決済を利用しており、至るところで様々な支払いの決済がスマホとQRコードをベースに行われている。最近では、屋台の支払いにまで対応しており、ほとんど現金を使わずに生活する人もいる状況になっているといわれる。</p>\n<p><img class=\"alignnone size-medium wp-image-11\" src=\"http://blockchain-jp-wiki.org/wordpress/wp-content/uploads/2018/02/fig01-300x144.jpg\" alt=\"\" width=\"300\" height=\"144\" srcset=\"http://118.27.35.38/wordpress/wp-content/uploads/2018/02/fig01-300x144.jpg 300w, http://118.27.35.38/wordpress/wp-content/uploads/2018/02/fig01-768x369.jpg 768w, http://118.27.35.38/wordpress/wp-content/uploads/2018/02/fig01.jpg 1000w\" sizes=\"(max-width: 300px) 100vw, 300px\" /></p>\n<p>それと同期するように、2017年4月にAlibaba Group傘下のFinTech企業であるAnt Financial（螞蟻金服）やその子会社でキャッシュレスモバイル決済の先陣であるAlipay（支付宝）が中心となり、「キャッシュレスアライアンス（無現金聯盟）」が15社・組織により設立された。国連環境計画（UNEP）も低排出社会実現の観点から創立メンバーに入っていることは興味深い。同アライアンスは今後5年以内に会員企業を3,000万社に増やし、100カ国にキャッシュレス化社会を拡大、推進していくこととしている。この動きも一帯一路の広がりと連動している側面が強く感じられる。</p>\n<h4>Alibabaのリアル店舗展開</h4>\n<p>AlibabaのEC／キャッシュレス分野に関する最近の具体例を見てみよう。同社の傘下に生鮮食品小売「盒馬鮮生」があり、数年前から北京・上海などでリアル店舗13店を展開している。決済は基本的にスマホアプリのみで行われるが、ネット経由での購入、宅配も当然可能である。</p>\n<p>また、Alibabaは無人コンビニ「Tao Cafe（淘咖啡）」も一部でコンセプト店の展開を始めている。リアルとバーチャルの融合やオムニチャネルの実現レベルと展開規模の点では、米Amazonより先行しているとの見解もある。このほか、日本の「地方創生」政策とも通じるところがある、農村地域でのB2C／C2Cマーケットプレイス「Taobao（農村淘宝）」の展開にも注力していることも興味深い。</p>\n<h4>キャッシュレスで改善される中国の社会課題</h4>\n<p>中国最大手のモバイル決済サービスで双璧をなす、AlibabaのAlipayおよびTencentのWeChat Pay（微信支付）は、日本でも大手コンビニや量販店など、インバウンド中国人客が多く訪れそうなところでは当たり前のように見かけるようになった。Alipayは2018年春にも日本人向けサービス開始を予定している。現在のAlipayやWeChat Payを使うには中国に銀行口座が必要であるが、それがなくても利用可能になるという。</p>\n<p>Alibabaの決済以外のFinTech関連の拡大も凄まじい。同社はネット通販（B2B、B2C［天猫、Tmall］、C2C［淘宝］）に関して蓄積した大量のデータやそれにひも付く個人情報に関連するオープンデータ（IDカード経由）を基に、少額融資サービスを展開している。融資の際には人工知能（AI）を駆使して1秒で与信判断ができるといわれる。前述した「農村淘宝」とも連動し、農家への融資などにも活用が検討されている。また、Alibabaのマネーマネジメントファンド（MMF）である「余額宝」の預かり資産が2017年9月、4年で世界最大（2,110億ドル、約23.2兆円）になっているという。これは、第2位の米JPモルガン系の2倍以上の規模だ。</p>\n<p>最近の動きで特に注目に値するのは、傘下の「Sesame Credit（芝麻信用）」による個人向け信用評価サービスの急速な普及であろう。Alibabaで決済される支払データや資産データなどの日ごろの取引状況などから個人への与信が数値化されるというものだ。もともと「性悪説」がはびこる相互不信社会であった中国で、利用者が「期限どおり返却する」「約束を守る」といった行動をとることで信用ポイントが上昇する。例えばこの１〜2年で爆発的に普及した街中のサイクルシェアや米ウーバーテクノロジーズ（Uber Technologies）に相当する「Didi（滴滴）」のライドシェアなどを利用する際にも、レーティングが高い場合には簡単に手続きができるなどのメリットがもたらされている。</p>\n<p>キャッシュレスの急速な普及の背景には、大量の偽札の流通、紙幣の衛生面での問題や、ビジネスをする上での信用の問題など、性悪説をベースとする社会課題が長く存在していたことが挙げられる。中国が最大の社会的課題をICTで解決し、今までの「信用できない社会」を「信用できる社会」に変貌させようとする壮大な実験をしているということだ。この流れは、Alibabaのジャック・マー（Jack Ma、馬雲）CEOが提唱する社会課題への貢献と連動しているという。</p>\n<h4>拡大するAlibabaのパブリッククラウド</h4>\n<p>Alibabaはパブリッククラウド分野でも顕著な成長を見せている。最近の統計ではAWS、Microsoftに続いて世界第3位に躍進した。2017年9月27日、米ガートナー（Gartner）の発表した2016年グローバルIaaS市場ランキング（売り上げベース）でAmazon、Microsoftに続き、Alibabaは第3位になった。前年比127％増は他社と比べて突出している。</p>\n<p><img class=\"alignnone size-medium wp-image-12\" src=\"http://blockchain-jp-wiki.org/wordpress/wp-content/uploads/2018/02/fig04-300x105.jpg\" alt=\"\" width=\"300\" height=\"105\" srcset=\"http://118.27.35.38/wordpress/wp-content/uploads/2018/02/fig04-300x105.jpg 300w, http://118.27.35.38/wordpress/wp-content/uploads/2018/02/fig04-768x270.jpg 768w, http://118.27.35.38/wordpress/wp-content/uploads/2018/02/fig04.jpg 1000w\" sizes=\"(max-width: 300px) 100vw, 300px\" /></p>\n<p>同社のパブリッククラウドであるAlibaba Cloud（中国国内では「阿里雲」）は世界に既に230万以上のユーザーを擁する。シンガポールに本社を置く同社は、全世界ノード数は530以上、データセンターについては2014〜2016年に北京、深圳、シンガポール2カ所、シリコンバレー、香港、ドバイ、フランクフルト、シドニーなどで新設または増設（全世界で14カ所）したほか、現地通信事業者などとの提携によりサービス展開を行っている。中国国内のパブリッククラウドのシェアは50％以上であり、断トツのシェアを誇る。Alibaba Cloudの2020年の売上高は87.2億ドル（約1兆円）、AWSに次ぐ第2位に成長するとの予想もある（ゴールドマン・サックス）。</p>\n<p>報道によるとAlibabaは今後3年間でR&Dに150億ドルを投資する計画と伝えらている。米国2カ所、中国2カ所、シンガポール、イスラエル、ロシアと合わせ7つの研究所を建設予定であり、傘下の物流企業「Cainiao（菜鳥）」への出資増も含め、今後5年で1,000億元をグローバル物流に投資する計画もある。</p>\n<h4>時価総額でAlibabaを上回ったTencentにも注目</h4>\n<p>Alibabaの時価総額は2017年10月21日に4,721億ドルに達し、この時点で米Amazonを抜いて世界最大のEC会社になったとの報道があった。その後の11月14日にはTencentの時価総額が5,000億ドルを超え、さらにAlibabaをも上回ったと報じられた。アジア企業が時価総額で5,000億ドルを超えるのは初めてであり、この時点で世界第6位になったという。</p>\n<p>このように、キャッシュレス社会をAlibabaとともにしのぎを削るTencentも、中国のICT市場のみならず、世界レベルで無視できない規模となっていくことが予想される。同社のパブリッククラウドはまだ発展途上であるが、着々とデータセンターなどのインフラをグローバルに拡大しているところだ。そして、その展開においても「一帯一路」のルートと重なり合うところが多い。</p>\n<p>AlibabaとTencentの両社は、通信キャリアとの連携も深めつつある。2017年10月20日にはキャリア第3位のChina Unicom（中国聯通）が両社とクラウド分野で提携。これと同時にAlibabaは中国聯通の2.05%、Tencentは5.21%株式をそれぞれ取得している。BATと通信事業者の資本提携はこれが初めてである。</p>\n<h4>是々非々で様々な側面から見るべき</h4>\n<p>米トランプ政権発足後、中国と米国の世界におけるバランスが変化している。保護主義、自国第一主義に向かう米国が「中国化」に向かっているようにもみえる。一方、一帯一路で各国と連携を図ろうとしている中国のほうが自由貿易を先導し「米国化」していると誤解してしまうかもしれない。しかし、本稿で紹介した内容のみに目が行ってしまうことには注意が必要だ。</p>\n<p>2017年6月に「サイバーセキュリティ法（網絡安全法）」が施行された中国のインターネットは、外資系企業に対しても各種ルールの順守を厳密に要求し管理を強める「マネージド・インターネット」という色合いが、より濃くなっていることにも留意すべきだろう。</p>\n<p>そのような中国のインターネットが一帯一路という広がりとともに、キャッシュレス、さらにはボーダーレスという形で、大きなトランスフォーメーションを起こしている。様々な側面を持つ中国に対しては、固定観念にとらわれず是々非々で見ていくことが必要だ。</p>\n",
+      "protected": false
+    },
+    "excerpt": {
+      "rendered": "<p>世界の巨大OTT（Over The Top）プレイヤー、あるいはITジャイアントと言えば、グーグル（Googl […]</p>\n",
+      "protected": false
+    },
+    "author": 1,
+    "featured_media": 0,
+    "comment_status": "open",
+    "ping_status": "open",
+    "sticky": false,
+    "template": "",
+    "format": "standard",
+    "meta": [],
+    "categories": [
+      1
+    ],
+    "tags": [],
+    "_links": {
+      "self": [
+        {
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/posts/9"
+        }
+      ],
+      "collection": [
+        {
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/posts"
+        }
+      ],
+      "about": [
+        {
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/types/post"
+        }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/users/1"
+        }
+      ],
+      "replies": [
+        {
+          "embeddable": true,
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/comments?post=9"
+        }
+      ],
+      "version-history": [
+        {
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/posts/9/revisions"
+        }
+      ],
+      "wp:attachment": [
+        {
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/media?parent=9"
+        }
+      ],
+      "wp:term": [
+        {
+          "taxonomy": "category",
+          "embeddable": true,
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/categories?post=9"
+        },
+        {
+          "taxonomy": "post_tag",
+          "embeddable": true,
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/tags?post=9"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "date": "2018-02-19T13:36:49",
+    "date_gmt": "2018-02-19T04:36:49",
+    "guid": {
+      "rendered": "http://blockchain-jp-wiki.org/wordpress/?p=4"
+    },
+    "modified": "2018-02-19T13:36:49",
+    "modified_gmt": "2018-02-19T04:36:49",
+    "slug": "%e3%82%b9%e3%83%9a%e3%83%bc%e3%82%b9x%e3%81%ae%e3%83%95%e3%82%a1%e3%83%ab%e3%82%b3%e3%83%b3%e3%83%98%e3%83%93%e3%83%bc%e6%89%93%e3%81%a1%e4%b8%8a%e3%81%92%e5%8b%95%e7%94%bb%e3%81%8c%e3%81%99%e3%81%94",
+    "status": "publish",
+    "type": "post",
+    "link": "http://118.27.35.38/wordpress/archives/4",
+    "title": {
+      "rendered": "スペースXのファルコンヘビー打ち上げ動画がすごい"
+    },
+    "content": {
+      "rendered": "<p>記念すべき当メディアの一本目の記事は何にしようかと悩んでネタ帳の数十本の候補を眺めていたところ、タイトルのニュースが流れてきました。</p>\n<p>すごい、シュール、最高、感動、鳥肌</p>\n<p>ビジネスの役に立つかどうか、知らないと損をするとか、それも大事なことなのだけれども、このニュースを届けたい、知ってほしい。</p>\n<p>・イーロン・マスク率いるSpaceXという民間の企業が<br />\n・アポロ計画のサターン型以来の大きな積載能力をもつロケットを使って<br />\n・真っ赤なテスラロードスターを<br />\n・地球と火星と小惑星セレスの軌道を巡る周回軌道に乗せることに成功<br />\n・しかもロケットブースターは使い捨てではなく再利用でその回収にも成功<br />\n・そのうち既存のロケットに比べて100分の1まで低コストで打ち上げができるという</p>\n<p>事実として伝えるなら以上となるが、動画をご覧いただきたい、演出も相まって非常に感動的であるので、音声つきで。</p>\n<p><img class=\"alignnone size-medium wp-image-5\" src=\"http://blockchain-jp-wiki.org/wordpress/wp-content/uploads/2018/02/23SCI-SPACEX1-superJumbo-300x200.jpg\" alt=\"\" width=\"300\" height=\"200\" srcset=\"http://118.27.35.38/wordpress/wp-content/uploads/2018/02/23SCI-SPACEX1-superJumbo-300x200.jpg 300w, http://118.27.35.38/wordpress/wp-content/uploads/2018/02/23SCI-SPACEX1-superJumbo-768x512.jpg 768w, http://118.27.35.38/wordpress/wp-content/uploads/2018/02/23SCI-SPACEX1-superJumbo-1024x683.jpg 1024w\" sizes=\"(max-width: 300px) 100vw, 300px\" /></p>\n<p>切り離されたロケットブースターが発射場まで戻ってきて2本同時に垂直着陸する様子はとても現実とは思えない。</p>\n<p>そして、宇宙空間に浮かぶのは、人工衛星でもなく、核弾頭でもなく、マネキンが乗ったテスラ・ロードスター。真紅のボディに反射する青く煙る水平線。人類が初めて目にする実写である。美しい。</p>\n<figure>\n<div class=\"fude-iframe-container\">\n<div class=\"fude-iframe-container-youtube\"><img class=\"alignnone size-medium wp-image-6\" src=\"http://blockchain-jp-wiki.org/wordpress/wp-content/uploads/2018/02/00-300x169.jpg\" alt=\"\" width=\"300\" height=\"169\" srcset=\"http://118.27.35.38/wordpress/wp-content/uploads/2018/02/00-300x169.jpg 300w, http://118.27.35.38/wordpress/wp-content/uploads/2018/02/00-768x432.jpg 768w, http://118.27.35.38/wordpress/wp-content/uploads/2018/02/00-1024x576.jpg 1024w, http://118.27.35.38/wordpress/wp-content/uploads/2018/02/00.jpg 1195w\" sizes=\"(max-width: 300px) 100vw, 300px\" /></div>\n</div>\n</figure>\n<p>これは宇宙開発ビジネスにとっても大きな意味を持っているのだが、STEMとArtによってこれだけ人の心を動かす、この感動を大切にしたい。</p>\n<p>公式の解説動画（CG）</p>\n<figure>\n<div class=\"fude-iframe-container\">\n<div class=\"fude-iframe-container-youtube\"><img class=\"alignnone size-medium wp-image-7\" src=\"http://blockchain-jp-wiki.org/wordpress/wp-content/uploads/2018/02/13-300x169.jpg\" alt=\"\" width=\"300\" height=\"169\" srcset=\"http://118.27.35.38/wordpress/wp-content/uploads/2018/02/13-300x169.jpg 300w, http://118.27.35.38/wordpress/wp-content/uploads/2018/02/13-768x432.jpg 768w, http://118.27.35.38/wordpress/wp-content/uploads/2018/02/13-1024x576.jpg 1024w, http://118.27.35.38/wordpress/wp-content/uploads/2018/02/13.jpg 1200w\" sizes=\"(max-width: 300px) 100vw, 300px\" /></div>\n</div>\n</figure>\n<p>次は、日本の企業がぜひ、真っ赤な実物大ザクを地球周回軌道上に投入して欲しい。皆わくわくすることだろう。</p>\n",
+      "protected": false
+    },
+    "excerpt": {
+      "rendered": "<p>記念すべき当メディアの一本目の記事は何にしようかと悩んでネタ帳の数十本の候補を眺めていたところ、タイトルのニュ […]</p>\n",
+      "protected": false
+    },
+    "author": 1,
+    "featured_media": 0,
+    "comment_status": "open",
+    "ping_status": "open",
+    "sticky": false,
+    "template": "",
+    "format": "standard",
+    "meta": [],
+    "categories": [
+      1
+    ],
+    "tags": [],
+    "_links": {
+      "self": [
+        {
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/posts/4"
+        }
+      ],
+      "collection": [
+        {
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/posts"
+        }
+      ],
+      "about": [
+        {
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/types/post"
+        }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/users/1"
+        }
+      ],
+      "replies": [
+        {
+          "embeddable": true,
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/comments?post=4"
+        }
+      ],
+      "version-history": [
+        {
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/posts/4/revisions"
+        }
+      ],
+      "wp:attachment": [
+        {
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/media?parent=4"
+        }
+      ],
+      "wp:term": [
+        {
+          "taxonomy": "category",
+          "embeddable": true,
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/categories?post=4"
+        },
+        {
+          "taxonomy": "post_tag",
+          "embeddable": true,
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/tags?post=4"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 1,
+    "date": "2018-02-19T13:27:10",
+    "date_gmt": "2018-02-19T04:27:10",
+    "guid": {
+      "rendered": "http://blockchain-jp-wiki.org/wordpress/?p=1"
+    },
+    "modified": "2018-02-19T13:27:10",
+    "modified_gmt": "2018-02-19T04:27:10",
+    "slug": "hello-world",
+    "status": "publish",
+    "type": "post",
+    "link": "http://118.27.35.38/wordpress/archives/1",
+    "title": {
+      "rendered": "Hello world!"
+    },
+    "content": {
+      "rendered": "<p>WordPress へようこそ。これは最初の投稿です。編集もしくは削除してブログを始めてください !</p>\n",
+      "protected": false
+    },
+    "excerpt": {
+      "rendered": "<p>WordPress へようこそ。これは最初の投稿です。編集もしくは削除してブログを始めてください !</p>\n",
+      "protected": false
+    },
+    "author": 1,
+    "featured_media": 0,
+    "comment_status": "open",
+    "ping_status": "open",
+    "sticky": false,
+    "template": "",
+    "format": "standard",
+    "meta": [],
+    "categories": [
+      1
+    ],
+    "tags": [],
+    "_links": {
+      "self": [
+        {
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/posts/1"
+        }
+      ],
+      "collection": [
+        {
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/posts"
+        }
+      ],
+      "about": [
+        {
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/types/post"
+        }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/users/1"
+        }
+      ],
+      "replies": [
+        {
+          "embeddable": true,
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/comments?post=1"
+        }
+      ],
+      "version-history": [
+        {
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/posts/1/revisions"
+        }
+      ],
+      "wp:attachment": [
+        {
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/media?parent=1"
+        }
+      ],
+      "wp:term": [
+        {
+          "taxonomy": "category",
+          "embeddable": true,
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/categories?post=1"
+        },
+        {
+          "taxonomy": "post_tag",
+          "embeddable": true,
+          "href": "http://118.27.35.38/wordpress/wp-json/wp/v2/tags?post=1"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  }
+
     ])
   }, 1000)
 }
 
-var UserList = {
+var PostList = {
   // HTML上のscriptタグのidを指定する
-  template: '#user-list',
+  template: '#post-list',
   data: function () {
     return {
       loading: false,
       // 初期値の空配列を定義
-      users: function () { return [] },
+      posts: function () { return [] },
       error: null
     }
   },
@@ -69,13 +443,15 @@ var UserList = {
   methods: {
     fetchData: function () {
       this.loading = true
-      // 取得したデータの結果をusersに格納する
-      getUsers((function (err, users) {
+      // 取得したデータの結果をpostsに格納する
+
+
+      getposts((function (err, posts) {
         this.loading = false
         if (err) {
           this.error = err.toString()
         } else {
-          this.users = users
+          this.posts = posts
         }
       }).bind(this))
     }
@@ -91,8 +467,8 @@ var UserList = {
         }
       },
       {
-        path: '/users',
-        component: UserList
+        path: '/posts',
+        component: PostList
       }
     ]
   })
