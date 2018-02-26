@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>callback</title>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+<main>
+  <h1>callback理解</h1>
+</main>
+
+<script>
+
+var f = function(){
+
+	//
+	var sayYellow = function(){
+		console.log('黄色です');
+	};
+
+	var sayBanana = function(callback){
+		console.log('バナナは');
+		callback();
+	};
+
+	//sayYellow関数を引数で渡す
+	sayBanana(sayYellow);
+	// sayBanana(function(){console.log('黄色でっせ');});
+
+};
+f();
+
+/* --- 変数・関数定義 --- */
+var trapCard = function() {
+  console.log('トラップカード発動!');
+};
+var sacrificeCard = function(sacrificeName) {
+  console.log(sacrificeName + 'を生け贄にするぜ!!');
+};
+// オレのターン！と表示してから、引数を実行する関数
+var myTurn = function(callback) {
+  console.log('オレのターン!');
+  callback();
+};
+
+/* 呼び出し */
+myTurn(trapCard);
+// オレのターン!
+// トラップカード発動!
+
+/* --- コールバック関数自体に引数を渡すには以下のように書くことも --- */
+/* function()を噛ませる */
+myTurn(function() {
+  sacrificeCard('ブルーアイズホワイトドラゴン');
+});
+
+
+</script>
+</body>
+</html>
+

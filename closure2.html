@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>クロージャー理解2</title>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+<main>
+  <h1>クロージャー理解2</h1>
+</main>
+
+<script>
+
+var f = function(){
+
+	//
+	var sayYellow = function(json){
+		console.log(json[0].id);
+	};
+
+	var getposts = function (callback) {
+		console.log('バナナは');
+		json = [{"id": 16}];
+
+		callback(json);
+	};
+
+
+	getposts(sayYellow);
+
+};
+f();
+
+</script>
+</body>
+</html>
+

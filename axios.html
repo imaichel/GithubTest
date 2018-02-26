@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>axios</title>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+<main>
+  <h1>axios</h1>
+</main>
+
+<script type="x-template" id="post-list">
+  <div>
+    <div class="loading" v-if="loading">ロード中...</div>
+    <div v-if="error" class="error">
+      {{ error }}
+    </div>
+    <!-- postsがロードされたら各投稿のタイトルを表示する -->
+    <div v-for="post in posts" :key="post.id">
+      <h2>{{ post.title.rendered }}</h2>
+    </div>
+  </div>
+</script>
+
+
+<script>
+
+var axi = axios.create({
+  baseURL: 'http://118.27.35.38/wordpress/wp-json/wp/v2/',
+  timeout: 1000,
+});
+
+var ary = axi.get('/posts', {
+    params: {
+      ID: 1
+    }
+  })
+  .then(function (response) {
+    console.log(response);
+    return response;
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+
+
+
+</script>
+</body>
+</html>
+

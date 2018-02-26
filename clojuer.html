@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>クロージャー理解</title>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+<main>
+  <h1>クロージャー理解</h1>
+</main>
+
+<script>
+function outer(){
+	
+	var x = 1;
+
+	return function(){
+		alert(x);
+		x = x + 1;
+	}
+
+}
+var f = outer();
+f();
+
+// function speak(){ alert('speak');}
+// speak();
+
+// var speak = function () { alert('speak');}
+// speak();
+
+// (function () { alert('speak');})();
+
+
+</script>
+</body>
+</html>
+
