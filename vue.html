@@ -54,7 +54,7 @@
 
     methods: {
       fetchDataAxios: function() {
-        const baseurl = 'http://118.27.35.38/wordpress/wp-json/wp/v2/'
+        const baseurl = 'https://blockchain-jp-wiki.org/wordpress/wp-json/wp/v2/'
         axios.create({
             baseURL: baseurl,
             timeout: 3000,
@@ -87,7 +87,7 @@
 
     methods: {
       fetchDataAxios: function() {
-        const baseurl = 'http://118.27.35.38/wordpress/wp-json/wp/v2/posts/';
+        const baseurl = 'https://blockchain-jp-wiki.org/wordpress/wp-json/wp/v2/posts/';
         var postid = this.$route.query.id; 
         console.log('postid=' + postid);
         axios.create({
