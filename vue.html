@@ -57,7 +57,7 @@
         const baseurl = 'https://blockchain-jp-wiki.org/wordpress/wp-json/wp/v2/'
         axios.create({
             baseURL: baseurl,
-            timeout: 3000,
+            timeout: 10000,
           }).get('/posts')
           .then(response => {this.posts = response.data;}
           );
@@ -92,7 +92,7 @@
         console.log('postid=' + postid);
         axios.create({
           baseURL: baseurl,
-          timeout: 3000,
+          timeout: 10000,
         }).get('/' + postid)
         .then(response => {
             this.post = response.data;
