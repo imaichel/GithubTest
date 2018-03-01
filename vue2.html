@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>もう一度、リンク上に戻す</title>
+  <title>もう一度、router,コンポーネント消す</title>
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -35,73 +35,6 @@
 
 <script type="text/javascript">
 
-  var PostList = {
-    // HTML上のscriptタグのidを指定する
-    template: '#post-list',
-    data: function () {
-      return {
-        posts: function () { return [] },
-      }
-    },
-    // 初期化時にデータを取得する
-    created: function () {
-      this.fetchDataAxios()
-    },
-    watch: {
-    '$route': 'fetchData'
-    },
-
-
-    methods: {
-      fetchDataAxios: function() {
-        const baseurl = 'https://blockchain-jp-wiki.org/wordpress/wp-json/wp/v2/'
-        axios.create({
-            baseURL: baseurl,
-            timeout: 10000,
-          }).get('/posts')
-          .then(response => {this.posts = response.data;}
-          );
-      }
-    }
-  }
-
-  var Post = {
-    template: '#post',
-    data: function () {
-      return {
-        post: function() {return [
-          {
-            "title": {"rendered": "TITLE"},
-            "content": {"rendered": "CONTENT"},
-          }
-          ]
-        },
-      }
-    },
-    created: function () {
-      this.fetchDataAxios()
-    },
-    watch: {
-    '$route': 'fetchData'
-    },
-
-    methods: {
-      fetchDataAxios: function() {
-        const baseurl = 'https://blockchain-jp-wiki.org/wordpress/wp-json/wp/v2/posts/';
-        var postid = this.$route.query.id; 
-        console.log('postid=' + postid);
-        axios.create({
-          baseURL: baseurl,
-          timeout: 10000,
-        }).get('/' + postid)
-        .then(response => {
-            this.post = response.data;
-            console.log(response.data);
-          }
-        );
-      }
-    }
-  }
 
   var router = new VueRouter({
     routes: [
@@ -110,10 +43,6 @@
         component: {
           template: '<div>トップページです。</div>'
         }
-      },
-      {
-        path: '/posts',
-        component: PostList
       },
     ]
   })
