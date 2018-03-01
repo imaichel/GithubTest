@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>調査検証</title>
+  <title>もう一度、リンク上に戻す</title>
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
+<div id="app">
+  <router-link to="/top">トップページ12行目</router-link>
+  <router-view></router-view>
+</div>
+
 
 
 <script type="x-template" id="post-list">
@@ -118,11 +123,6 @@
   }).$mount('#app')
   
 </script>
-
-<div id="app">
-  <router-link to="/top">トップページ123行目</router-link>
-  <router-view></router-view>
-</div>
 
 </body>
 </html>
