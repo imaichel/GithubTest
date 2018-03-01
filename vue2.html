@@ -10,27 +10,10 @@
 <body>
 <div id="app">
   <router-link to="/top">トップページ</router-link>
-  <router-link to="/posts">記事一覧</router-link>
   <router-view></router-view>
 </div>
 
 
-<script type="x-template" id="post-list">
-  <div>
-    <div v-for="post in posts" :key="post.id">
-      <h2><router-link :to="{ path: 'post', query: { id: post.id }}">{{ post.title.rendered }}</router-link></h2>
-    </div>
-  </div>
-</script>
-
-<script type="x-template" id="post">
-  <div>
-      <h2 v-if="post.title">{{ post.title.rendered }}</h2>
-      <div v-if="post.content">
-        <div v-html="post.content.rendered"></div>
-      </div>
-  </div>
-</script>
 
 
 <script type="text/javascript">
@@ -110,14 +93,6 @@
         component: {
           template: '<div>トップページです。</div>'
         }
-      },
-      {
-        path: '/posts',
-        component: PostList
-      },
-      {
-        path: '/post',
-        component: Post
       },
     ]
   })
