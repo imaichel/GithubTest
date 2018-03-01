@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>◯コンポーネント追加</title>
+  <title>☓コンポーネントPost削除</title>
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -64,43 +64,6 @@
     }
   }
 
-  var Post = {
-    template: '#post',
-    data: function () {
-      return {
-        post: function() {return [
-          {
-            "title": {"rendered": "TITLE"},
-            "content": {"rendered": "CONTENT"},
-          }
-          ]
-        },
-      }
-    },
-    created: function () {
-      this.fetchDataAxios()
-    },
-    watch: {
-    '$route': 'fetchData'
-    },
-
-    methods: {
-      fetchDataAxios: function() {
-        const baseurl = 'https://blockchain-jp-wiki.org/wordpress/wp-json/wp/v2/posts/';
-        var postid = this.$route.query.id; 
-        console.log('postid=' + postid);
-        axios.create({
-          baseURL: baseurl,
-          timeout: 10000,
-        }).get('/' + postid)
-        .then(response => {
-            this.post = response.data;
-            console.log(response.data);
-          }
-        );
-      }
-    }
-  }
 
   var router = new VueRouter({
     routes: [
