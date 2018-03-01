@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>調査検証</title>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+<div id="app">
+  <router-link to="/top">トップページ</router-link>
+  <router-link to="/posts">記事一覧</router-link>
+  <router-view></router-view>
+</div>
+
+
+<script type="x-template" id="post-list">
+  <div>
+    <div v-for="post in posts" :key="post.id">
+      <h2><router-link :to="{ path: 'post', query: { id: post.id }}">{{ post.title.rendered }}</router-link></h2>
+    </div>
+  </div>
+</script>
+
+<script type="x-template" id="post">
+  <div>
+      <h2 v-if="post.title">{{ post.title.rendered }}</h2>
+      <div v-if="post.content">
+        <div v-html="post.content.rendered"></div>
+      </div>
+  </div>
+</script>
+
+
+<script type="text/javascript">
+
+  var PostList = {
+    // HTML上のscriptタグのidを指定する
+    template: '#post-list',
+    data: function () {
+      return {
+        posts: function () { return [] },
+      }
+    },
+    // 初期化時にデータを取得する
+    created: function () {
+      this.fetchDataAxios()
+    },
+    watch: {
+    '$route': 'fetchData'
+    },
+
+
+    methods: {
+      fetchDataAxios: function() {
+        const baseurl = 'https://blockchain-jp-wiki.org/wordpress/wp-json/wp/v2/'
+        axios.create({
+            baseURL: baseurl,
+            timeout: 10000,
+          }).get('/posts')
+          .then(response => {this.posts = response.data;}
+          );
+      }
+    }
+  }
+
+  var Post = {
+    template: '#post',
+    data: function () {
+      return {
+        post: function() {return [
+          {
+            "title": {"rendered": "TITLE"},
+            "content": {"rendered": "CONTENT"},
+          }
+          ]
+        },
+      }
+    },
+    created: function () {
+      this.fetchDataAxios()
+    },
+    watch: {
+    '$route': 'fetchData'
+    },
+
+    methods: {
+      fetchDataAxios: function() {
+        const baseurl = 'https://blockchain-jp-wiki.org/wordpress/wp-json/wp/v2/posts/';
+        var postid = this.$route.query.id; 
+        console.log('postid=' + postid);
+        axios.create({
+          baseURL: baseurl,
+          timeout: 10000,
+        }).get('/' + postid)
+        .then(response => {
+            this.post = response.data;
+            console.log(response.data);
+          }
+        );
+      }
+    }
+  }
+
+  var router = new VueRouter({
+    routes: [
+      {
+        path: '/top',
+        component: {
+          template: '<div>トップページです。</div>'
+        }
+      },
+      {
+        path: '/posts',
+        component: PostList
+      },
+      {
+        path: '/post',
+        component: Post
+      },
+    ]
+  })
+
+  var app = new Vue({
+    router: router
+  }).$mount('#app')
+  
+</script>
+
+</body>
+</html>
+
