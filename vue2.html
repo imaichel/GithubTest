@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>◯constの末尾に;</title>
+  <title>◯constだけ</title>
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -45,13 +45,6 @@
     methods: {
       fetchDataAxios: function() {
         const baseurl = 'https://blockchain-jp-wiki.org/wordpress/wp-json/wp/v2/';
-        axios.create({
-            baseURL: baseurl,
-            timeout: 10000,
-          }).get('/posts')
-          .then(response => {this.posts = response.data;}
-          );
-
       }
     }
   }
