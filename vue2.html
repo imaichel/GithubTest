@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>◯router posts戻す</title>
+  <title>◯ax.getまで</title>
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -47,6 +47,7 @@
       fetchDataAxios: function() {
         const baseurl = 'https://blockchain-jp-wiki.org/wordpress/wp-json/wp/v2/';
         var ax = axios.create({baseURL: baseurl, timeout: 10000});
+        var axget = ax.get('/posts');
       }
     }
   }
