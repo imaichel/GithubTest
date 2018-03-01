@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>◯無名thenでデータバインドした</title>
+  <title>☓アロー関数を書き換えてthat</title>
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -47,8 +47,16 @@
       fetchDataAxios: function() {
         const baseurl = 'https://blockchain-jp-wiki.org/wordpress/wp-json/wp/v2/';
         var ax = axios.create({baseURL: baseurl, timeout: 10000});
+        console.log(ax);
         var axget = ax.get('/posts');
-        var axgetthen = axget.then(response = function() {this.posts = response.data});
+        console.log(axget);
+        var that = this;
+        var axgetthen = axget.then(function (response) {
+          console.log(response.data);
+          that.posts = response.data;
+          console.log(that);
+        });
+        console.log(axgetthen);
       }
     }
   }
