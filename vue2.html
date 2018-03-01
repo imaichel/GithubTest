@@ -14,6 +14,22 @@
 </div>
 
 
+<script type="x-template" id="post-list">
+  <div>
+    <div v-for="post in posts" :key="post.id">
+      <h2><router-link :to="{ path: 'post', query: { id: post.id }}">{{ post.title.rendered }}</router-link></h2>
+    </div>
+  </div>
+</script>
+
+<script type="x-template" id="post">
+  <div>
+      <h2 v-if="post.title">{{ post.title.rendered }}</h2>
+      <div v-if="post.content">
+        <div v-html="post.content.rendered"></div>
+      </div>
+  </div>
+</script>
 
 
 <script type="text/javascript">
