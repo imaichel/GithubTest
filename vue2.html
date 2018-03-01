@@ -18,6 +18,36 @@
 
 <script type="text/javascript">
 
+  var PostList = {
+    // HTML上のscriptタグのidを指定する
+    template: '#post-list',
+    data: function () {
+      return {
+        posts: function () { return [] },
+      }
+    },
+    // 初期化時にデータを取得する
+    created: function () {
+      this.fetchDataAxios()
+    },
+    watch: {
+    '$route': 'fetchData'
+    },
+
+
+    methods: {
+      fetchDataAxios: function() {
+        const baseurl = 'https://blockchain-jp-wiki.org/wordpress/wp-json/wp/v2/'
+        axios.create({
+            baseURL: baseurl,
+            timeout: 10000,
+          }).get('/posts')
+          .then(response => {this.posts = response.data;}
+          );
+      }
+    }
+  }
+
   var router = new VueRouter({
     routes: [
       {
