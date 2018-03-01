@@ -18,15 +18,21 @@
 
 <script type="text/javascript">
 
-  var PostList = {
-    // HTML上のscriptタグのidを指定する
-    template: '#post-list',
+
+
+  var Post = {
+    template: '#post',
     data: function () {
       return {
-        posts: function () { return [] },
+        post: function() {return [
+          {
+            "title": {"rendered": "TITLE"},
+            "content": {"rendered": "CONTENT"},
+          }
+          ]
+        },
       }
     },
-    // 初期化時にデータを取得する
     created: function () {
       this.fetchDataAxios()
     },
@@ -34,16 +40,20 @@
     '$route': 'fetchData'
     },
 
-
     methods: {
       fetchDataAxios: function() {
-        const baseurl = 'https://blockchain-jp-wiki.org/wordpress/wp-json/wp/v2/'
+        const baseurl = 'https://blockchain-jp-wiki.org/wordpress/wp-json/wp/v2/posts/';
+        var postid = this.$route.query.id; 
+        console.log('postid=' + postid);
         axios.create({
-            baseURL: baseurl,
-            timeout: 10000,
-          }).get('/posts')
-          .then(response => {this.posts = response.data;}
-          );
+          baseURL: baseurl,
+          timeout: 10000,
+        }).get('/' + postid)
+        .then(response => {
+            this.post = response.data;
+            console.log(response.data);
+          }
+        );
       }
     }
   }
