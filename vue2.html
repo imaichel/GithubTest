@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>☓コンポーネントPost削除</title>
+  <title>☓テンプレートPost削除</title>
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -19,15 +19,6 @@
     <div v-for="post in posts" :key="post.id">
       <h2><router-link :to="{ path: 'post', query: { id: post.id }}">{{ post.title.rendered }}</router-link></h2>
     </div>
-  </div>
-</script>
-
-<script type="x-template" id="post">
-  <div>
-      <h2 v-if="post.title">{{ post.title.rendered }}</h2>
-      <div v-if="post.content">
-        <div v-html="post.content.rendered"></div>
-      </div>
   </div>
 </script>
 
