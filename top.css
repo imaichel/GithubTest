@@ -1,0 +1,144 @@
+@chareset "UTF-8";
+body {
+    background: gray;
+    color: #0a0a0a;
+    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 18px;
+    padding: 0 !important;
+    margin: 0 !important;
+    /*margin-top: -20px !important;*/
+}
+.top-bar nav {
+    max-width: 99%;
+    width: 1250px;
+    margin: auto;
+    position: relative;
+}
+.top-bar .logo {
+    width: 43px;
+    height: 21px;
+    padding: 5px 8px 4px 10px;
+    margin-top: 5px;
+    fill: white;
+    background: #0a0a0a;
+    color: #fafafa;
+}
+
+#static {
+     position: static;
+     background-color: #999999;
+}
+#relative {
+     position: relative;
+     top: 10px;
+     left: 10px;
+     background-color: #aaaaaa;
+}
+
+.container {
+	width: 768px;
+	margin: 0 auto;
+	background: lavender;
+}
+
+header {
+	background: tomato; 
+}
+
+ul#menu {
+	padding: 0;
+	margin: 0;
+	list-style-type: none; 
+	font-size: 0;
+}
+
+ul#menu > li {
+	display: inline-block;
+}
+
+ul#menu > li > a {
+	display: inline-block;
+	width: 80px;
+	height: 40px;
+	background: orange;
+	font-size: 16px;
+	text-decoration: none;
+	text-align: center;
+	line-height: 40px;
+}
+ul#menu > li > a:hover {
+	opacity: 0.5;
+}
+
+main .top-post {
+	position: relative;
+	display: inline-block;
+}
+
+main .title {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	font-size: 32px;
+	padding: 10px;
+	font-weight: bold;
+	background: white;
+	opacity: 0.8;
+
+}
+main {
+	background: skyblue;
+	padding: 10px 0;
+}
+
+ul#posts > li > div.post_img > img {
+	width: 250px;
+	height: 125px;
+}
+
+ul#posts {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+ul#posts h2, ul#posts p {
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+}
+
+ul#posts .post_img {
+	width: 250px;
+}
+
+ul#posts .post_info {
+	width: 230px;
+	padding: 0 10px 0 10px;
+	background: lightgreen;
+}
+
+ul#posts li {
+	overflow: hidden;
+	width: 250px;
+	margin: 0 3px;
+	background: pink;
+}
+
+ul#posts li:not(:last-child) {
+	padding-bottom: 10px;
+	margin-bottom: 15px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+	float: left;
+}
+
+footer {
+	/*background: gray;*/
+}
+
+#eyecatch {
+	background: url('http://blockchain-jp-wiki.org/wordpress/wp-content/uploads/2018/02/23SCI-SPACEX1-superJumbo-768x512.jpg') no-repeat;
+	background-size: cover;
+	background-position: 50% 20%;
+	height: 100px;
+}
