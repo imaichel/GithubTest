@@ -174,6 +174,63 @@ ul#posts li:not(:last-child) {
 	float: left;
 }
 
+/*postsのコメント*/
+.top_comment {
+	padding-top: 10px;
+	padding-bottom: 2px;
+	margin-bottom: 2px;
+	border-bottom: 1px solid rgba(200, 200, 200, 0.4);
+}
+
+
+.top_comment > img {
+	padding-top: 4px; 
+	height: 38px;
+	width: 38px;
+	border-radius: 19px;
+	float: left;
+}
+
+.top_comment > div.comment_info {
+	/*height: 48px;*/
+	padding-left: 5px;
+	/*background-color: pink;*/
+}
+
+.comment_info > a.top_comment_name {
+	margin-left: 10px;
+	font-weight: bold;
+	color: navy;
+	float: left;
+}
+
+.comment_info > div.top_comment_prof {
+	margin-left: 1.0em;
+	color: navy;
+	background-color: limegreen;
+	float: left;
+}
+
+.comment_info > div.comment_posted {
+	color: darkgray;
+	text-align: right;
+}
+
+.comment_info > div.top_comment_body {
+	font-size: 12px;
+	padding-top: 2px;
+	clear: both;
+}
+
+div.orig > a {
+	font-size: 14px;
+	}
+div.orig > a:link { color: darkgray }
+div.orig > a:visited { color: darkgray }
+
+
+
+
 /*postページ*/
 #post {
 	background: #fafafa;
