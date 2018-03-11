@@ -28,6 +28,7 @@ font-family: 'Meiryo',-apple-system,'BlinkMacSystemFont','.SFNSDisplay-Regular',
 
 a {
 	text-decoration: none;
+
 }
 
 .top-bar .logo {
@@ -195,6 +196,9 @@ ul.post_info_detail {
 ul.post_info_detail > li#origin {
 	color: darkgray;
 }
+li#origin > a:link { color: darkgray }
+li#origin > a:visited { color: darkgray }
+
 ul.post_info_detail > li#posted {
 	color: darkgray;
 }
@@ -219,14 +223,32 @@ ul#paybutton {
 }
 ul#paybutton > li {
 	display: inline-block;
+	vertical-align:middle;
+	height: 24px;
 }
 
+ul#paybutton > li > a:visited { color: dodgerblue }
+
 .icon {
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    background: url(../images/lightning.png) no-reprat;
+    width: 24px;
+    height: 24px;
+/*    margin: 2px;
+    padding: 4px; 
+*/}
+
+ul#sourcebutton {
+	border: 2px;
+	border-radius: 2px;
+	border-style: solid;
+	background: #fdfdfd;
+	border-color: #a0a0a0;
+	color: #a0a0a0;
+	text-align: center;
+	height: 40px;
+	padding-top: 15px;
+	list-style-type: none; 
 }
+ul#sourcebutton > li > a:visited { color: #a0a0a0 }
 
 ul#paybutton > li#price {
 	font-weight: bold;
