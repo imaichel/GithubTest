@@ -207,7 +207,7 @@ ul#posts li:not(:last-child) {
 .comment_info > div.top_comment_prof {
 	margin-left: 1.0em;
 	color: navy;
-	background-color: limegreen;
+	/*background-color: limegreen;*/
 	float: left;
 }
 
