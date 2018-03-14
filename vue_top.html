@@ -68,12 +68,103 @@
 
 
 <script type="x-template" id="post">
-  <div>
-      <h2 v-if="post.title">{{ post.title.rendered }}</h2>
-      <div v-if="post.content">
-        <div v-html="post.content.rendered"></div>
+  <main>
+	  <div class="container">
+	    <div id="post">
+	      <div class="post_img">
+					<img :src="post._embedded['wp:featuredmedia'][0]['media_details']['sizes']['full']['source_url']">
+	      </div>
+	      <div class="post_info">
+
+	      <h2 class="post_title" v-if="post.title">{{ post.title.rendered }}</h2>
+				<p id="post_description">
+	      <div v-if="post.content">
+	        <div v-html="post.content.rendered"></div>
+	      </div>
+	      </p>
+	      </div>
+	    </div>	
+    </div>	
+  </main>
+
+<main>
+  <div class="container">
+    <div id="post">
+      <div class="post_img">
+        <img src="http://blockchain-jp-wiki.org/wordpress/wp-content/uploads/2018/02/23SCI-SPACEX1-superJumbo-768x512.jpg">
       </div>
-  </div>
+      <div class="post_info">
+        <h2 class="post_title">スペースXのファルコンヘビー打ち上げ動画がすごい</h2>
+        <ul class="post_info_detail">
+          <li id="origin"><a href="http://blockchain-jp-wiki.org/wordpress/archives/4">STEAMメディア</a></li>
+          <li id="posted">22時間前</li>
+        </ul>
+        
+        <p id="post_description">
+記念すべき当メディアの一本目の記事は何にしようかと悩んでネタ帳の数十本の候補を眺めていたところ、タイトルのニュースが流れてきました。<br>
+<br>
+すごい、シュール、最高、感動、鳥肌<br>
+<br>
+ビジネスの役に立つかどうか、知らないと損をするとか、それも大事なことなのだけれども、このニュースを届けたい、知ってほしい。<br>
+        </p>
+        <div id="paybutton_wrapper">
+          <ul id="paybutton">
+            <li><img class="icon" src="./images/lightning.png"></li>
+            <li><a href="postmock.html">ピュアモードで全文(552文字)を読む</a></li>
+            <li id="price">0.2</li>
+            <li id="price_unit">ZNY</li>
+          </ul>
+          <ul id="sourcebutton">
+            <li><a href="http://blockchain-jp-wiki.org/wordpress/archives/4">提供元サイトで読む(無料)</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="comments">
+      <ul class="comment_list">
+
+        <li class="comment_card">
+          <img class="comment_profimg" src="https://blockchain-jp-wiki.org/wordpress/wp-content/uploads/2018/03/hiroImai.png">
+          <div class="comment_wrapper">
+            <div class="comment_info">
+              <a href="" class="comment_name">Hiro Imai</a>
+              <div class="comment_prof">NASA Jet Propulsion Laboratory Systems Engineer</div>
+              <div class="comment_posted">10時間前</div>
+              <div class="comment">
+なるほど、12000機全部が同じ高度ではなくて、4400機が1100km、7500機が320kmと分かれるのか。320kmは国際宇宙ステーションの通常の運用高度のちょっと下。デジタルデバイドの解消は人類にとって大きな進歩だけど、デブリはちょっと心配。…
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="comment_card">
+          <img class="comment_profimg" src="https://blockchain-jp-wiki.org/wordpress/wp-content/uploads/2018/03/hiroImai.png">
+          <div class="comment_wrapper">
+            <div class="comment_info">
+              <a href="" class="comment_name">Hiro Imai</a>
+              <div class="comment_prof">NASA Jet Propulsion Laboratory Systems Engineer</div>
+              <div class="comment_posted">10時間前</div>
+              <div class="comment">
+なるほど、12000機全部が同じ高度ではなくて、4400機が1100km、7500機が320kmと分かれるのか。320kmは国際宇宙ステーションの通常の運用高度のちょっと下。デジタルデバイドの解消は人類にとって大きな進歩だけど、デブリはちょっと心配。…
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+        <div id="paybutton_wrapper">
+          <ul id="paybutton">
+            <li>すべての専門家コメントを読む</li>
+            <li id="price">0.2</li>
+            <li id="price_unit">ZNY</li>
+          </ul>
+        </div>
+
+    </div>
+
+  </div> 
+</main>
+
+
 </script>
 
 
@@ -136,11 +227,11 @@
         const baseurl = 'https://blockchain-jp-wiki.org/wordpress/wp-json/wp/v2/posts/';
         var that = this;
         var postid = this.$route.query.id; 
-        console.log('postid=' + postid);
+        console.log('postid=' + postid + '?_embed');
         axios.create({
           baseURL: baseurl,
           timeout: 10000,
-        }).get('/' + postid)
+        }).get('/' + postid + '?_embed')
         .then(function (response) {
             that.post = response.data;
             console.log(response.data);
