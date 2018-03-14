@@ -23,6 +23,11 @@
     </nav>
 	</div>
   <router-view></router-view>
+	<footer>
+	  <div class="container">
+	    <p>footer</p>
+	  </div> 
+	</footer>
 
 
 </div>
@@ -59,6 +64,16 @@
   </div>
 </main>
 
+</script>
+
+
+<script type="x-template" id="post">
+  <div>
+      <h2 v-if="post.title">{{ post.title.rendered }}</h2>
+      <div v-if="post.content">
+        <div v-html="post.content.rendered"></div>
+      </div>
+  </div>
 </script>
 
 
