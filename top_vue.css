@@ -1,0 +1,387 @@
+@chareset "UTF-8";
+body {
+    background: lightgrey;
+    color: #0a0a0a;
+font-family: 'Meiryo',-apple-system,'BlinkMacSystemFont','.SFNSDisplay-Regular','Hiragino Kaku Gothic Pro','Yu Gothic','MS PGothic','Segoe UI','Verdana','Helvetica','Arial',sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 0 !important;
+    margin: 0 !important;
+    margin-top: -8px !important;
+}
+.top-bar {
+	width: 100%;
+	position: fixed;
+	top: 0px;
+	z-index: 100;
+	background: aliceblue;
+	left: 0;
+	box-shadow: 0px 3px 10px 0 lightgrey;
+
+*/}
+.top-bar nav {
+    width: 80%;
+    margin: auto;
+    position: relative;
+	font-size: 16px;
+}
+
+a {
+	text-decoration: none;
+
+}
+
+.top-bar .logo {
+    width: 50px;
+    height: 21px;
+    padding: 5px 8px 4px 8px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    fill: white;
+	text-align: center;
+    background: dodgerblue;
+    color: snow;
+	/*float: left;*/
+
+}
+#navbar-rightmenu-wrapper {
+	width: 280px;
+	position: absolute;
+	top: 0;
+	right: 0;
+
+}
+.profimg {
+	padding-top: 2px; 
+	height: 28px;
+	width: 28px;
+	border-radius: 10px;
+	float: left;;
+
+}
+#user-profile {
+    margin: 0;
+    padding: 5px 8px 4px 8px;
+    width: 100px;
+    height: 30px;
+    float: left;
+	/*background: crimson;*/
+}
+#wallet_balance {
+	font-weight: bold;
+	color: red;
+	padding-top: 5px;
+	padding-left: 20px;
+	text-align: right;
+
+}
+
+
+.container {
+	width: 768px;
+	margin: 0 auto;
+	/*background: lavender;*/
+}
+
+header {
+	/*background: tomato; */
+}
+
+ul#menu {
+	padding: 0;
+	margin: 0;
+	list-style-type: none; 
+	font-size: 0;
+}
+
+ul#menu > li {
+	display: inline-block;
+}
+
+ul#menu > li > a {
+	display: inline-block;
+	width: 80px;
+	height: 40px;
+	background: royalblue;
+	font-size: 16px;
+	text-decoration: none;
+	text-align: center;
+	line-height: 40px;
+}
+ul#menu > li > a:hover {
+	opacity: 0.5;
+}
+
+/*main .top-post {
+	position: relative;
+	display: inline-block;
+}
+*/
+main .title {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	font-size: 32px;
+	padding: 10px;
+	font-weight: bold;
+	background: white;
+	opacity: 0.8;
+
+}
+main {
+	margin-top: 45px;
+	/*background: skyblue;*/
+	padding: 10px 0;
+}
+
+ul#posts > li > div.post_img > img {
+	width: 250px;
+	height: 125px;
+}
+
+ul#posts {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+ul#posts h2, ul#posts p {
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+}
+
+ul#posts .post_img {
+	width: 250px;
+}
+
+ul#posts .post_info {
+	width: 230px;
+	padding: 0 10px 0 10px;
+	/*background: lightgreen;*/
+}
+
+ul#posts li {
+	overflow: hidden;
+	width: 250px;
+	margin: 0 3px;
+	background: floralwhite;
+}
+
+ul#posts li:not(:last-child) {
+	padding-bottom: 10px;
+	margin-bottom: 15px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+	float: left;
+}
+
+/*postsのコメント*/
+.top_comment {
+	padding-top: 10px;
+	padding-bottom: 2px;
+	margin-bottom: 2px;
+	border-bottom: 1px solid rgba(200, 200, 200, 0.4);
+}
+
+
+.top_comment > img {
+	padding-top: 4px; 
+	height: 38px;
+	width: 38px;
+	border-radius: 19px;
+	float: left;
+}
+
+.top_comment > div.comment_info {
+	/*height: 48px;*/
+	padding-left: 5px;
+	/*background-color: pink;*/
+}
+
+.comment_info > a.top_comment_name {
+	margin-left: 10px;
+	font-weight: bold;
+	color: navy;
+	float: left;
+}
+
+.comment_info > div.top_comment_prof {
+	margin-left: 1.0em;
+	color: navy;
+	/*background-color: limegreen;*/
+	float: left;
+}
+
+.comment_info > div.comment_posted {
+	color: darkgray;
+	text-align: right;
+}
+
+.comment_info > div.top_comment_body {
+	font-size: 12px;
+	padding-top: 2px;
+	clear: both;
+}
+
+div.orig > a {
+	font-size: 14px;
+	}
+div.orig > a:link { color: darkgray }
+div.orig > a:visited { color: darkgray }
+
+
+
+
+/*postページ*/
+#post {
+	background: #fafafa;
+	color: #111;
+	line-height: 1.8;
+	/*font-size: 1.6rem;*/
+}
+#post > div.post_img > img {
+	width: 100%;
+}
+#post > div.post_info{
+	padding: 5px 20px 5px 20px;
+}
+
+ul.post_info_detail {
+	margin: 0;
+	padding: 0;
+	list-style-type: none; 
+}
+ul.post_info_detail > li#origin {
+	color: darkgray;
+}
+li#origin > a:link { color: darkgray }
+li#origin > a:visited { color: darkgray }
+
+ul.post_info_detail > li#posted {
+	color: darkgray;
+}
+ul.post_info_detail > li {
+	display: inline-block;
+}
+
+#paybutton_wrapper {
+	padding: 5px 40px; 
+}
+ul#paybutton {
+	border: 2px;
+	border-radius: 2px;
+	border-style: solid;
+	background: azure;
+	border-color: dodgerblue;
+	color: dodgerblue;
+	text-align: center;
+	height: 40px;
+	padding-top: 15px;
+	list-style-type: none; 
+}
+ul#paybutton > li {
+	display: inline-block;
+	vertical-align:middle;
+	height: 24px;
+}
+
+ul#paybutton > li > a:visited { color: dodgerblue }
+
+.icon {
+    width: 24px;
+    height: 24px;
+/*    margin: 2px;
+    padding: 4px; 
+*/}
+
+ul#sourcebutton {
+	border: 2px;
+	border-radius: 2px;
+	border-style: solid;
+	background: #fdfdfd;
+	border-color: #a0a0a0;
+	color: #a0a0a0;
+	text-align: center;
+	height: 40px;
+	padding-top: 15px;
+	list-style-type: none; 
+}
+ul#sourcebutton > li > a:visited { color: #a0a0a0 }
+
+ul#paybutton > li#price {
+	font-weight: bold;
+	color: red;
+}
+
+div.comments > ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+li.comment_card:not(:last-child) {
+	padding-bottom: 10px;
+	margin-bottom: 15px;
+	border-bottom: 1px solid rgba(200, 200, 200, 0.4);
+}
+
+
+div.comments > ul > li > img {
+	padding-top: 5px; 
+	height: 38px;
+	width: 38px;
+	border-radius: 19px;
+	float: left;;
+
+}
+
+div.comment_wrapper {
+	margin-left: 40px;
+	padding-left: 10px;
+}
+
+div.comment_info {
+	font-size: 14px;
+}
+
+a.comment_name {
+	font-weight: bold;
+	color: navy;
+	float: left;
+}
+
+div.comment_prof {
+	margin-left: 1.0em;
+	color: navy;
+	float: left;
+}
+
+div.comment_posted {
+	color: darkgray;
+	text-align: right;
+}
+
+div.comment {
+	margin-top: 18px;
+}
+
+div.comments {
+	margin-top: 6px;
+	background: #fafafa;
+	color: #111;
+	line-height: 1.8;
+	padding: 5px 20px;
+
+}
+
+
+footer {
+	/*background: gray;*/
+}
+
+/*#eyecatch {
+	background: url('http://blockchain-jp-wiki.org/wordpress/wp-content/uploads/2018/02/23SCI-SPACEX1-superJumbo-768x512.jpg') no-repeat;
+	background-size: cover;
+	background-position: 50% 20%;
+	height: 100px;
+}*/

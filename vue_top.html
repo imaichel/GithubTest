@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MED（Vue版）</title>
+  <link rel="stylesheet" href="top_vue.css">
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+<div id="app">
+	<div class="top-bar" id="top-bar">
+    <nav>
+	  <router-link to="/posts"><div class="logo">MED</div></router-link>
+      <div id="navbar-rightmenu-wrapper">
+        <img class="profimg" src="https://blockchain-jp-wiki.org/wordpress/wp-content/uploads/2018/03/imaichel.png">
+        <a id="user-profile" href="/">@hiroimai410</a>
+        <div id="wallet_balance">
+          残高:100.0 ZNY
+        </div>
+      </div>
+    </nav>
+	</div>
+  <router-view></router-view>
+
+
+</div>
+
+
+<script type="x-template" id="post-list">
+<main>
+  <div class="container">
+    <ul id="posts">
+	    <li v-for="post in posts" :key="post.id">
+        <div class="post_img">
+        	<img :src="post._embedded['wp:featuredmedia'][0]['media_details']['sizes']['full']['source_url']">
+        </div>
+        <div class="post_info">
+	      	<h2>
+	      		<router-link :to="{ path: 'post', query: { id: post.id }}">{{ post.title.rendered }}</router-link>
+	      	</h2>
+          <div class="top_comment">
+            <img class="comment_profimg" src="https://blockchain-jp-wiki.org/wordpress/wp-content/uploads/2018/03/hiroImai.png">
+            <div class="comment_info">
+              <a href="" class="top_comment_name">Hiro Imai</a>
+              <div class="top_comment_prof">NASA Jet Propulsion</div>
+              <div class="top_comment_body">なるほど、12000機全部が同じ高度ではなくて、4400機が1100km、7500機が320kmと分かれるのか…
+              </div>
+            </div>
+          </div>
+
+          <div class="orig">
+            <a href="http://blockchain-jp-wiki.org/wordpress/archives/4">STEAMメディア</a>
+          </div>
+        </div>
+	    </li>
+    </ul>
+  </div>
+</main>
+
+</script>
+
+
+<script type="text/javascript">
+
+  var PostList = {
+    // HTML上のscriptタグのidを指定する
+    template: '#post-list',
+    data: function () {
+      return {
+        posts: function () { return [] },
+      }
+    },
+    // 初期化時にデータを取得する
+    created: function () {
+      this.fetchDataAxios()
+    },
+    watch: {
+    '$route': 'fetchData'
+    },
+
+
+    methods: {
+      fetchDataAxios: function() {
+        const baseurl = 'https://blockchain-jp-wiki.org/wordpress/wp-json/wp/v2/';
+        var that = this;
+
+        axios.create({
+            baseURL: baseurl,
+            timeout: 10000,
+          }).get('/posts?_embed')
+          .then(function (response) {that.posts = response.data;}
+          );
+      }
+    }
+  }
+
+  var Post = {
+    template: '#post',
+    data: function () {
+      return {
+        post: function() {return [
+          {
+            "title": {"rendered": "TITLE"},
+            "content": {"rendered": "CONTENT"},
+          }
+          ]
+        },
+      }
+    },
+    created: function () {
+      this.fetchDataAxios()
+    },
+    watch: {
+    '$route': 'fetchData'
+    },
+
+    methods: {
+      fetchDataAxios: function() {
+        const baseurl = 'https://blockchain-jp-wiki.org/wordpress/wp-json/wp/v2/posts/';
+        var that = this;
+        var postid = this.$route.query.id; 
+        console.log('postid=' + postid);
+        axios.create({
+          baseURL: baseurl,
+          timeout: 10000,
+        }).get('/' + postid)
+        .then(function (response) {
+            that.post = response.data;
+            console.log(response.data);
+          }
+        );
+      }
+    }
+  }
+
+  var router = new VueRouter({
+    routes: [
+      {
+        path: '/top',
+        component: {
+          template: '<div>トップページです。</div>'
+        }
+      },
+      {
+        path: '/posts',
+        component: PostList
+      },
+      {
+        path: '/post',
+        component: Post
+      },
+    ]
+  })
+
+  var app = new Vue({
+    router: router
+  }).$mount('#app')
+  
+</script>
+
+</body>
+</html>
+
